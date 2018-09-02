@@ -1,0 +1,72 @@
+A software is a sequence of machine code, it is a collection of data and computer instructions. To run a software, it must be loaded into hardware(computer, embedded board, or MCU control board), the CPU will execute the loaded machine code and output the running result.
+
+#+BEGIN_SRC dot :file ./images/CPUnDeviceInOutBlock.svg :cmdline -Kdot -Tsvg
+digraph dataProcessingInCPU {
+  //rankdir = LR;
+  //ranksep = .5;
+
+  subgraph cluster_0 {
+    node [style=filled];
+    label = "Input Devices";
+    style = solid;
+    color = blue;
+    keyboard;
+    mouse;
+  }
+  {
+  subgraph cluster_1 {
+    //rankdir=TB;
+    node [style=filled];
+    label = "Processing Block";
+    style = solid;
+    color = blue;
+
+    subgraph cluster_11 {
+      //rankdir = TB;
+      node [style=filled];
+      label = "Storage Devices";
+      style = solid;
+      color = red;
+      RAM -> disk;
+      disk -> RAM;
+      disk [label="Hard disk/\nFlash memory"];
+    }
+    subgraph cluster_12 {
+      //rankdir = TB;
+      node [style=filled];
+      label = "Central Processing Unit";
+      style = solid;
+      color = green;
+      CPU -> cachememory;
+      cachememory -> CPU;
+    }
+  }
+  }
+  subgraph cluster_2 {
+    node [style=filled];
+    label = "Output Devices";
+    style = solid;
+    color = blue;
+    monitor;
+    printer;
+  }
+
+  keyboard -> RAM;
+  mouse -> RAM;
+  RAM -> cachememory;
+  cachememory -> RAM;
+  RAM -> monitor;
+  RAM -> printer;
+
+  //CPU -> keyboard [style="dashed"];
+  //CPU -> mouse [style="dashed"];
+  CPU -> disk [style="dashed"];
+  CPU -> RAM [style="dashed"];
+  CPU -> cachememory [style="dashed"];
+
+  notice [shape=box, label="Project: practice\lSubject: Data processing flow\lAuthor: YenHung Chen\lE-mail: yhchen@wizign.com\lRevision:\l========== ====================\l2018-09-02 Created by YenHung Chen\l"];
+}
+#+END_SRC
+#+CAPTION: Data processing flow
+#+RESULTS:
+[[file:./images/CPUnDeviceInOutBlock.svg]]
